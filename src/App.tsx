@@ -1,42 +1,31 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
-import HorizontalScroll from "./components/horizontalScroll/horizontalScroll";
-import { motion } from "motion/react";
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
+import Works from "./pages/Works";
 
-function App() {
+import Lenis from "lenis";
+
+const App = () => {
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }, []);
   return (
-    <Container>
-      <Section>
-        <h1> this is the header</h1>
-      </Section>
-      <HorizontalScroll />
-      <Section>
-        <h1> this is the footer</h1>
-        <MotionButton
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          whileDrag={{ scale: 0.9, rotate: -10 }}
-          drag
-        />
-      </Section>
-    </Container>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="*" element={<ErrorPage />} />
+      <Route path="/Works" element={<Works />} />
+    </Routes>
   );
-}
-
+};
 export default App;
-
-const Container = styled.div``;
-
-const Section = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #242424;
-  color: white;
-`;
-
-const MotionButton = styled(motion.button)`
-  width: 400px;
-  height: 100px;
-`;

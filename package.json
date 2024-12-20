@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
+    "antd": "^5.22.5",
     "lenis": "^1.1.18",
     "motion": "^11.15.0",
     "react": "^18.3.1",
